@@ -11,7 +11,7 @@ public class Classroom {
     private String room_name = null;
     private int room_capacity =0;
     private boolean room_accessibility = false;
-
+    private String equipment=null;
     public Classroom(int id, String name, int capacity,boolean accessibility)
     {
         setRoom_id(id);
@@ -20,13 +20,13 @@ public class Classroom {
         setAccessibility(accessibility);
 
     }
-
-
-    private void masterdata()
+    public Classroom()
     {
-        // Populate the database with 20 different classrooms.
 
     }
+
+
+
 
     public String getName() {
         return this.room_name;
@@ -58,5 +58,13 @@ public class Classroom {
 
     public void setRoom_id(int room_id) {
         this.room_id = room_id;
+    }
+
+    public String getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(String equipment) {
+        this.equipment = equipment;
     }
 }

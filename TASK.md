@@ -36,8 +36,9 @@ effectively.
 
 The system must allow users to:
 
-1.  Register customers (companies or individuals).
-2.  Manage the 20 classrooms (name, capacity, equipment, accessibility).
+1.  Register customers (companies or individuals). # DONE 
+
+2.  Manage the 20 classrooms (name, capacity, equipment, accessibility). //
 3.  Search for available rooms based on date, time, capacity, equipment,
     or accessibility.
 4.  Create new bookings for a customer.

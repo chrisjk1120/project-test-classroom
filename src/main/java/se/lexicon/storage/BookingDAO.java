@@ -20,11 +20,6 @@ public class BookingDAO implements StorageDao {
     }
 
     @Override
-    public void save(Customer customer) {
-
-    }
-
-    @Override
     public void save(Booking booking)
     {
         //TODO: implement;
