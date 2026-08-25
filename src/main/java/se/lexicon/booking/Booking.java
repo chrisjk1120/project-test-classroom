@@ -14,6 +14,9 @@ public class Booking {
     //private int booked_classroom;
     private Classroom room = null;
     private Customer customer = null;
+    private String start_date="";
+    private String end_date="";
+
     public Booking()
     {
 
@@ -29,8 +32,8 @@ public class Booking {
         BookingDAO booking = new BookingDAO();
         try
         {
-            booking.listBookings();
-        } catch (SQLException e)
+            booking.getBookings();
+        } catch (Exception e)
         {
             IO.println("Err:" +  e.getMessage());
         }
@@ -60,5 +63,21 @@ public class Booking {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 }

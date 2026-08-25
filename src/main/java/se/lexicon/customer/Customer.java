@@ -1,7 +1,6 @@
 package se.lexicon.customer;
 
 import se.lexicon.storage.CustomerDAO;
-import se.lexicon.storage.StorageDao;
 
 public class Customer {
 
@@ -10,7 +9,6 @@ public class Customer {
     private int id = 0;
     private String email = null;
     private CustomerTypes customer_type; // Really do
-    //void parseCustomer(int id,String name, CustomerTypes type);
     CustomerDAO storage=new CustomerDAO();
     public Customer(int id, String name, String email) {
         setId(id);
@@ -19,6 +17,7 @@ public class Customer {
         setCustomer_type(type);
     }
 
+
     public Customer() {
 
     }
@@ -26,15 +25,7 @@ public class Customer {
     public void update() {
 
     }
-    public Customer SaveCustomer(String name, String email, CustomerTypes type) {
-        // Set the fields and look for formatting errors, throw an exception BEFORE saving.
-        this.setCustomer_name(name);
-        this.setEmail(email);
-        this.setCustomer_type(type);
 
-        storage.createCustomer(this);
-    return this;
-    }
 
     public CustomerTypes getType() {
         return type;
@@ -61,16 +52,19 @@ public class Customer {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+
     public CustomerTypes getCustomer_type() {
-        return customer_type;
+        return this.customer_type;
     }
+
+
 
     public void setCustomer_type(CustomerTypes customer_type) {
         this.customer_type = customer_type;

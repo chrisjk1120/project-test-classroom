@@ -1,5 +1,7 @@
 package se.lexicon.storage;
 import com.mysql.cj.PreparedQuery;
+import se.lexicon.booking.Booking;
+import se.lexicon.customer.Customer;
 import se.lexicon.storage.exceptions.ConnectionException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,12 +15,12 @@ public class StorageDAOImpl implements StorageDao {
         {
             this.conn=this.connect();
         }
-        private Connection connect()
+    private Connection connect()
         {
             Connection conn =null;
             try {
 
-                conn=DriverManager.getConnection(URL, user, password);
+                conn=DriverManager.getConnection(DbConfig.URL, DbConfig.user, DbConfig.password);
 
             } catch(Exception e) {
                 IO.println(e.getMessage());

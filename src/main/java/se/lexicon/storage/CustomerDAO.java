@@ -2,8 +2,11 @@ package se.lexicon.storage;
 
 import java.sql.PreparedStatement;
 import se.lexicon.booking.Booking;
+import se.lexicon.customer.Company;
 import se.lexicon.customer.Customer;
 import se.lexicon.customer.CustomerTypes;
+import se.lexicon.customer.Individual;
+import se.lexicon.storage.exceptions.SaveCustomerException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,38 +21,43 @@ public class CustomerDAO implements StorageDao {
         this.storage=new StorageDAOImpl();
     }
 
-    public void createCustomer(Customer customer)
-    {
-        // Id is autoincrement in db, hence we don't have to think about it.
-        String sql = "INSERT INTO customers (name,type,email) VALUES(?,?,?)";
 
+
+@Override
+    public void save(Customer customer)
+    {
+        String sql="INSERT INTO customers (name,email,type) VALUES(?,?,?)";
         try {
-            PreparedStatement stmt = this.storage.conn.prepareStatement(sql);
-            stmt.setString(1,customer.getCustomer_name());
-            stmt.setString(2,customer.getCustomer_type().toString());
-            stmt.setString(3, customer.getEmail());
-            stmt.executeUpdate();
-        } catch (Exception e)
-        {
-            IO.println(e.getMessage());
-        }
+            PreparedStatement stmt = storage.conn.prepareStatement(sql);
+            try {
+                stmt.setString(1, customer.getCustomer_name());
+                stmt.setString(2, customer.getEmail());
+                stmt.setString(3, customer.getType().name()); // We have a method return string instead. Convert to a string.
+                stmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new SaveCustomerException("SQL exception thrown:" + e.getMessage());
+            } catch (NullPointerException e) {
+                throw new SaveCustomerException("Conversion failed");
+            }
+        } catch(SQLException e) {
+                 throw new SaveCustomerException("Something is wrong with this sql:" + e.getMessage());
     }
 
-    /*public List<Booking> FindBookingsForCustomer(int id) {
-        String sql = "SELECT * FROM customers";
-    }*/
+    }
+
+
 
     public List<Customer> FindCustomers(String name)
     {
         //
-        String sql = "SELECT * FROM customers WHERE name LIKE '%?%'";
+        String sql = "SELECT * FROM customers WHERE name LIKE ?";
         List<Customer> customers = new ArrayList<>();
         String customer_name = null;
         String customer_email = null;
         int customer_id = 0;
         try {
             PreparedStatement stmt = this.storage.conn.prepareStatement(sql);
-            stmt.setString(1,name);
+            stmt.setString(1,"%"+name+"%");
             //ResultSet rs = stmt.getResultSet();
             ResultSet rs = stmt.executeQuery();
             while(rs.next())
@@ -59,16 +67,20 @@ public class CustomerDAO implements StorageDao {
                 customer_name=rs.getString("name");
                 customer_email=rs.getString("email");
                 customer_id=rs.getInt("id");
-
-                Customer cust = new Customer(customer_id,customer_name,customer_email);
-
+                Customer cust;
+                if(type==CustomerTypes.INDIVIDUAL) {
+                    cust = new Individual(customer_id, customer_name, customer_email);
+                } else {
+                    cust = new Company(customer_id,customer_name,customer_email);
+                }
+                customers.add(cust);
 
             }
             return customers;
         } catch (SQLException e){
             //throw new SQLException("Error searching database");
             //As a tempoary solution we print the error here
-            IO.println(e.getMessage());
+            IO.println("aasd" + e.getMessage());
         }
 
 

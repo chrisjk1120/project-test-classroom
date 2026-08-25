@@ -19,9 +19,33 @@ public class BookingDAO implements StorageDao {
         this.storage = new StorageDAOImpl();
     }
 
-    public List<Booking> listBookings() throws SQLException {
-        String sql = """
+    @Override
+    public void save(Customer customer) {
+
+    }
+
+    @Override
+    public void save(Booking booking)
+    {
+        //TODO: implement;
+    }
+    public void updateBooking(Booking booking)
+    {
+        String sql="UPDATE bookings SET booking_start=?,booking_end=?,booked_by=?,booked_classroom=? WHERE id=?";
+        try {
+            PreparedStatement stmt = storage.conn.prepareStatement(sql);
+        } catch (SQLException e)
+        {
+            IO.println(e);
+        }
+    }
+    public List<Booking> getBookings()  {
+
+            String sql =
+                    """
 select b.id as booking_id,
+b.book_start as booking_start,
+b.book_end as booking_end,
 c.name as customer_name,
 c.email as customer_email,
 c.type as customer_type,
@@ -30,18 +54,22 @@ r.id as room_id,
 r.name as room_name,
 r.capacity as room_capacity,
 r.accessibility as room_accessibility
-
 from bookings  b
 join customers c on b.booked_by = c.id
-join classroom r on b.booked_classroom  = r.id;
+join classroom r on b.booked_classroom  = r.id
+where b.book_start  > now();
+
 """;
 
 
-// Next comes a list of declarations for all the variables.
-// They are not really needed, but helps readability
+
+// Next comes a list of declarations for all tvariables.
+// They are not really needed, but helps redability
+
 
 int booking_id=0;
-String customer_name="";
+String customer_name
+                    ="";
 String customer_email = "";
 CustomerTypes customer_type;
 int customer_id=0;
@@ -69,7 +97,8 @@ Customer cust=null;
                     room_name = rs.getString("room_name");
                     room_capacity = rs.getInt("room_capacity");
                     room_accessibility = rs.getBoolean("room_accessibility");
-
+                    booking_start = rs.getDate("booking_start");
+                    booking_end = rs.getDate("booking_end");
                 } catch (SQLException e){
                 throw new InvalidBookingException("Data for booking id:" + booking_id + " seems to be corrupt\n" + e.getMessage() );
             }
@@ -87,9 +116,9 @@ Customer cust=null;
             }
             return bookings;
         } catch (SQLException e) {
-            throw new SQLException("Error with SQL:" + sql + "\n" + e.getMessage());
+            IO.println("Error with SQL:" + sql + "\n" + e.getMessage());
         }
-
+        return bookings;
     }
 }
 
