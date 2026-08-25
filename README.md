@@ -9,7 +9,7 @@ classDiagram
     +String name
     +int capacity
     +boolean Accessible 
-    class Customer
+    
     }
     
     class Customer {

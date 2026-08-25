@@ -1,17 +1,26 @@
 package se.lexicon.classroom;
 import se.lexicon.customer.*;
+import se.lexicon.storage.StorageDAOImpl;
+import se.lexicon.storage.StorageDao;
+
 /* This class will give the metods and fields to handle the classroom-object
 
 */
 public class Classroom {
-    private String name = null;
-    private int capacity =0;
-    private boolean accessibility = false;
+    private int room_id=0;
+    private String room_name = null;
+    private int room_capacity =0;
+    private boolean room_accessibility = false;
 
-    public void Classroom(String name, int capacity,boolean accessibility)
+    public Classroom(int id, String name, int capacity,boolean accessibility)
     {
+        setRoom_id(id);
+        setName(name);
+        setCapacity(capacity);
+        setAccessibility(accessibility);
 
     }
+
 
     private void masterdata()
     {
@@ -20,26 +29,34 @@ public class Classroom {
     }
 
     public String getName() {
-        return name;
+        return this.room_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.room_name = name;
     }
 
     public int getCapacity() {
-        return capacity;
+        return this.room_capacity;
     }
 
     public void setCapacity(int capacity) {
-        this.capacity = capacity;
+        this.room_capacity = capacity;
     }
 
     public boolean isAccessibility() {
-        return accessibility;
+        return room_accessibility;
     }
 
     public void setAccessibility(boolean accessibility) {
-        this.accessibility = accessibility;
+        this.room_accessibility = accessibility;
+    }
+
+    public int getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(int room_id) {
+        this.room_id = room_id;
     }
 }
