@@ -123,7 +123,7 @@ public class CustomerPresentation {
     {
         IO.println("===CUSTOMER MODULE===");
         IO.println("1) List customers");
-        IO.println("2) Edit customer");
+        IO.println("2) Edit customer ***NOT IMPLEMENTED***");
         IO.println("3) List bookings for customer");
         IO.println("4) Add booking for customer");
         IO.println("5) Add new customer");

@@ -1,7 +1,9 @@
-# TODO
-* Create a class-diagram
-* Create a database-diagram
-
+# Classroom rental-project
+This project was the show the skills aquired so far. I admit that I 
+did not plan properly doing the ClassDiagram. 
+The diagram below does not show how the Storage is being used.
+It does not show my different layers either, this will
+be updated soon.
 
 ## 
 ## ClassDiagram:
@@ -57,6 +59,7 @@ erDiagram
 customers {
 INT id PK
 VARCHAR_45 name
+VARCHAR_45 email
 ENUM type
 }
 
@@ -64,15 +67,16 @@ ENUM type
         INT id PK
         VARCHAR_45 name
         TEXT capacity
-        TEXT accessibility
+        ENUM accessibility
+        TEXT equipment
     }
 
     bookings {
         INT id PK
         INT booked_by FK
         INT booked_classroom FK
-        DATETIME book_start
-        DATETIME book_end
+        TIMESTAMP book_start
+        TIMESTMAP book_end
     }
 
     customers ||--o{ bookings : "booked_by"
