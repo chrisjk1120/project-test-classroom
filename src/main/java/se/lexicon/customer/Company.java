@@ -13,7 +13,7 @@ public class Company extends Customer {
 
         setCustomer_name(name);
         setEmail(email);
-        setCustomer_type(CustomerTypes.COMPANY);
+        setType(CustomerTypes.COMPANY);
     }
 
 }

@@ -1,7 +1,6 @@
 package se.lexicon.classroom;
-import se.lexicon.customer.*;
-import se.lexicon.storage.StorageDAOImpl;
-import se.lexicon.storage.StorageDao;
+import se.lexicon.presentation.ClassroomPresentation;
+import se.lexicon.storage.ClassroomDAO;
 
 /* This class will give the metods and fields to handle the classroom-object
 
@@ -17,6 +16,7 @@ public class Classroom {
         setRoom_id(id);
         setName(name);
         setCapacity(capacity);
+        //setEquipment(equipment);
         setAccessibility(accessibility);
 
     }
@@ -25,6 +25,11 @@ public class Classroom {
 
     }
 
+    public void listClassrooms()
+    {
+        ClassroomDAO storage = new ClassroomDAO();
+        storage.list().forEach(ClassroomPresentation::present);
+    }
 
 
 

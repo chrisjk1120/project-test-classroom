@@ -3,7 +3,10 @@ package se.lexicon.presentation;
 import se.lexicon.booking.Booking;
 import se.lexicon.storage.BookingDAO;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 public class Bookings {
 
@@ -15,7 +18,8 @@ public class Bookings {
     {
         BookingDAO storage = new BookingDAO();
         IO.println("|Booking#\t\t|Customer\t\t\tRoom");
-        storage.getBookings().forEach(item ->
+        String currentDate = LocalDate.now().toString();
+        storage.getBookings(currentDate).forEach(item ->
         {
             Presentation.printText("| "+ item.getId()  +"\t\t\t|" + item.getCustomer().getCustomer_name() + " |\t\t\t" + item.getRoom().getName());
 
@@ -29,6 +33,9 @@ public class Bookings {
 
     }
 
+    public static Date toUtilDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
     static public void ShowBookingOperations()
     {
         IO.println("0) Exit");

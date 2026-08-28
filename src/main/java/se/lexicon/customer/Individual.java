@@ -8,7 +8,7 @@ public class Individual extends Customer {
         super.setId(id);
         super.setEmail(email);
         super.setCustomer_name(name);
-        super.setCustomer_type(CustomerTypes.INDIVIDUAL);
+        super.setType(CustomerTypes.INDIVIDUAL);
     }
 
 

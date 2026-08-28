@@ -38,15 +38,15 @@ The system must allow users to:
 
 1.  Register customers (companies or individuals). # DONE 
 
-2.  Manage the 20 classrooms (name, capacity, equipment, accessibility). //
+2.  Manage the 20 classrooms (name, capacity, equipment, accessibility). // Done
 3.  Search for available rooms based on date, time, capacity, equipment,
-    or accessibility.
+    or accessibility. // Done
 4.  Create new bookings for a customer.
 5.  Add optional comments to a booking (e.g., allergies or special
     requirements).
 6.  Validate bookings so a room cannot be double-booked.
-7.  View bookings for a specific room.
-8.  View bookings for a specific customer.
+7.  View bookings for a specific room. 
+8.  View bookings for a specific customer. // DONE 
 9.  View all upcoming bookings in the system.
 10. Store and load data using SQL + JDBC.
 11. Interact with the application through a console menu.

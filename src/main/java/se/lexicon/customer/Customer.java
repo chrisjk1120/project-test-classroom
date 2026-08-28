@@ -1,22 +1,37 @@
 package se.lexicon.customer;
 
 import se.lexicon.storage.CustomerDAO;
-
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 public class Customer {
 
     private CustomerTypes type = null;
     private String customer_name = null;
     private int id = 0;
     private String email = null;
-    private CustomerTypes customer_type; // Really do
     CustomerDAO storage=new CustomerDAO();
     public Customer(int id, String name, String email) {
         setId(id);
         setCustomer_name(name);
         setEmail(email);
-        setCustomer_type(type);
+        setType(type);
     }
 
+    private boolean isDuplicate(String name)
+    {
+     List<Customer> customers = this.storage.FindCustomers("");
+     customers.stream()
+             .filter(customer -> customer.getCustomer_name().equalsIgnoreCase(name))
+             .toList();
+            IO.println(customers.size());
+            if(customers.isEmpty())
+            {
+                return false;
+            } else {
+                return true;
+            }
+    }
 
     public Customer() {
 
@@ -59,14 +74,4 @@ public class Customer {
         this.email = email;
     }
 
-
-    public CustomerTypes getCustomer_type() {
-        return this.customer_type;
-    }
-
-
-
-    public void setCustomer_type(CustomerTypes customer_type) {
-        this.customer_type = customer_type;
-    }
 }

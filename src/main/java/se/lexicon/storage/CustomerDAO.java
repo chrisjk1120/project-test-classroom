@@ -46,6 +46,27 @@ public class CustomerDAO implements StorageDao {
     }
 
 
+    public boolean FindCustomer(int id)
+    {
+        // Find customer based on ID.
+        String sql = "SELECT * FROM customers WHERE id = ? LIMIT 1"; // I know that this only should return one row.
+
+        try {
+            PreparedStatement stmt = this.storage.conn.prepareStatement(sql);
+            stmt.setInt(1,id);
+            //ResultSet rs = stmt.getResultSet();
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                return true;
+            }
+        } catch (SQLException e){
+            //throw new SQLException("Error searching database");
+            //As a tempoary solution we print the error here
+            IO.println("aasd" + e.getMessage());
+        }
+        return false;
+    }
 
     public List<Customer> FindCustomers(String name)
     {

@@ -10,10 +10,9 @@ public class Presentation
     {
 
             IO.println("1) List upcoming bookings");
-            IO.println("2) Add booking");
-            IO.println("3) List customers");
-            IO.println("4) Add customer");
-            IO.println("5) List rooms");
+            IO.println("2) Manage classrooms");
+            IO.println("3) Manage customers");
+            IO.println("6) List rooms");
 
 
     }

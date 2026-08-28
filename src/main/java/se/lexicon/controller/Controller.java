@@ -4,14 +4,17 @@ import se.lexicon.customer.Customer;
 import se.lexicon.customer.CustomerTypes;
 import se.lexicon.customer.InvalidCustomerFormat;
 import se.lexicon.presentation.Bookings;
+import se.lexicon.presentation.ClassroomPresentation;
 import se.lexicon.presentation.CustomerPresentation;
 import se.lexicon.presentation.Presentation;
 
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import se.lexicon.booking.Booking;
 import se.lexicon.storage.CustomerDAO;
+import se.lexicon.storage.exceptions.*;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class Controller {
     // This class will handle all data
@@ -46,7 +49,9 @@ public class Controller {
                                 Booking booking = new Booking();
 
                                 // Exceptions should be thrown if invalid format.
-                                booking.setStart_date(Presentation.userInput(("Enter startdate")));
+                                String searchDate = Presentation.userInput("Enter startdate");
+
+                                booking.setStart_date(stringToDate(searchDate));
                                 booking.setEnd_date(Presentation.userInput(("Enter enddate")));
                                 Presentation.printText("Listing current customers");
                                 CustomerPresentation.listAllCustomers();
@@ -55,6 +60,7 @@ public class Controller {
 
 
                             case 2:
+
 
                             case 3:
 
@@ -66,37 +72,15 @@ public class Controller {
 
 
                 case 2:
+                    // Class to modify classroom
+                    ClassroomPresentation.menuHandler();
                     break;
                 case 3:
-                    CustomerPresentation.listAllCustomers();
+                    CustomerPresentation.menuHandler();
                     break;
                 case 4:
                     // Add new customer
-                    Customer newCust = new Customer();
-                    newCust.setCustomer_name(Presentation.userInput("Enter name"));
-                    newCust.setEmail(Presentation.userInput("Enter email"));
-                    try {
-                        String custType = Presentation.userInput("Custeomer type? (INDIVIDUAL/COMPANY)").toUpperCase();
-                        if(custType.equals("COMPANY")) {
-                            newCust.setType(CustomerTypes.COMPANY);
-                        } else if(custType.equals("INDIVIDUAL")) {
-                            newCust.setType(CustomerTypes.INDIVIDUAL);
-                        } else {
-                            throw new InvalidCustomerFormat("Entered customertype is not supperted");
-                        }
-
-                    } catch (Exception e) {
-                        // Will handle in our own error handler
-                        IO.println("Please enter INDIVIDUAL _OR_ COMPANY" + e.getMessage());
-
-                    }
-
-                    CustomerDAO storage = new CustomerDAO();
-                    try {
-                        storage.save(newCust);
-                    } catch ()
-                    Presentation.printText("New customer added");
-
+                    IO.println("MOVED TO OWN CONTROLLER");
 
                     break;
                 case 99:
@@ -106,5 +90,9 @@ public class Controller {
                     Presentation.printText("Invalid selection");
             }
         }
+    }
+    public static Date stringToDate(String dateString) {
+        LocalDate localDate = LocalDate.parse(dateString);
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 }
