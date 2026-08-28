@@ -147,8 +147,8 @@ WHERE b.id is not NULL
 
         try {
             PreparedStatement stmt = this.storage.conn.prepareStatement(sql);
-            stmt.setTimestamp(1, stringToTimestamp(start));
-            stmt.setTimestamp(2, stringToTimestamp(end));
+            stmt.setTimestamp(1, stringToTimestamp(end));
+            stmt.setTimestamp(2, stringToTimestamp(start));
             stmt.setInt(3,roomId);
             ResultSet rs = stmt.executeQuery();
             //IO.println(executedSql);
