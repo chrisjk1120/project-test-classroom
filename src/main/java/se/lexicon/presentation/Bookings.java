@@ -21,7 +21,7 @@ public class Bookings {
         String currentDate = LocalDate.now().toString();
         storage.getBookings(currentDate).forEach(item ->
         {
-            Presentation.printText("| "+ item.getId()  +"\t\t\t|" + item.getCustomer().getCustomer_name() + " |\t\t\t" + item.getRoom().getName());
+            Presentation.printText("| "+ item.getId()  +"\t\t\t|" + item.getStart_date() + "\t\t|" + item.getEnd_date() + "\t\t|" + item.getCustomer().getCustomer_name() + " |\t\t\t" + item.getRoom().getName());
 
         });
 
@@ -39,7 +39,7 @@ public class Bookings {
     static public void ShowBookingOperations()
     {
         IO.println("0) Exit");
-        IO.println("1) Delete booking");
+        IO.println("1) Delete booking *** NOT IMPLEMETED ***");
         IO.println("2) Change booking");
         IO.println("3) Add booking");
     }

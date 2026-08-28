@@ -22,6 +22,7 @@ public class ClassroomPresentation {
         Presentation.printText("1) Print classrooms");
         Presentation.printText("2) Edit Classroom");
         Presentation.printText("3) Search availability");
+        Presentation.printText("99) Main menu");
         selection=Integer.parseInt(Presentation.userInput("Choice"));
         switch(selection)
         {
@@ -70,6 +71,9 @@ public class ClassroomPresentation {
                 }
 
                 break;
+            case 99:
+                return;
+
         }
         }
     }

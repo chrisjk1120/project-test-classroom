@@ -12,7 +12,7 @@ public class Presentation
             IO.println("1) List upcoming bookings");
             IO.println("2) Manage classrooms");
             IO.println("3) Manage customers");
-            IO.println("6) List rooms");
+
 
 
     }

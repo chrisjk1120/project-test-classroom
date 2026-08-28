@@ -18,7 +18,7 @@ public class Booking {
     private Classroom room = null;
     private Customer customer = null;
     private Date start_date;
-    private String end_date="";
+    private Date end_date;
     public Booking()
     {
         // Do nothing
@@ -65,6 +65,7 @@ public class Booking {
             customer.setType(CustomerTypes.valueOf(rs.getString("customer_type")));
             this.setId(rs.getInt("booking_id"));
             this.setStart_date(rs.getDate("booking_start"));
+            this.setEnd_date(rs.getDate("booking_end"));
             this.setRoom(classr);
             this.setCustomer(customer);
         } catch (SQLException e) {
@@ -108,11 +109,11 @@ public class Booking {
         this.start_date = start_date;
     }
 
-    public String getEnd_date() {
+    public Date getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(String end_date) {
+    public void setEnd_date(Date end_date) {
         this.end_date = end_date;
     }
 }
